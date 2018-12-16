@@ -1,30 +1,34 @@
 package com.quick.poker;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Deck {
-    Card[] cards = new Card[52];
+    public static final int CARDS_COUNT = 52;
+    private List<Card> cards = new ArrayList<>();
     public Deck() {
-        for (int i = 0; i < 52; i++) {
-            cards[i] = new Card(i);
+        for (int i = 0; i < CARDS_COUNT; i++) {
+            cards.add(new Card(i));
         }
     }
 
     public void shuffle() {
-        for (int i = 0; i < 52; i++) {
-            int r = new Random().nextInt(52);
-            Card tmp = cards[i];
-            cards[i] = cards[r];
-            cards[r] = tmp;
-        }
+        Collections.shuffle(cards);
     }
 
     public void print() {
-        for (int i = 0; i < 52; i++) {
-            System.out.print(cards[i].get() + " ");
-            if (i % 13 == 12) {
+        int count = 0;
+        for (Card card : cards) {
+            System.out.print(card.get() + " ");
+            if (count%13 == 12) {
                 System.out.println();
             }
+            count++;
         }
+    }
+
+    public List<Card> getCards() {
+        return cards;
     }
 }
